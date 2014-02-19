@@ -249,4 +249,4 @@ class Shape(object):
                 self.game = game
 
         def drawRect(self,c,x,y,w,h,outline=0):
-                pygame.draw.rect(self.game.screen,c,[x,y,w,h],outline)
+                pygame.draw.rect(self.game.screen,c,[x,y,w,h],outline) 
