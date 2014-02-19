@@ -1,7 +1,7 @@
 PyBird
 ======
 
-This is a Python version of Flappy Bird using pygame.
+This is a Python version of Flappy Bird using Game library based on pyGame and Python.
 
 GAMEPLAY: To direct a flying bird, which moves continuously to the right, between each oncoming set of pipes without colliding with them, which otherwise ends the game. The bird briefly flaps upward each time the player presses space bar or clicks the screen, and the player is scored on the number of pipe sets the bird successfully passes through.
 
