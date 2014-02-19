@@ -32,6 +32,8 @@ class Pipe(object):
         self.y = randint(-90,135)
         self.speed = -5
         self.GAP = 100
+        self.pipeTOP = Image("img\\pipe_top.png",self.game) #Y-axis Min: -100 Max: 135
+        self.pipeBOT = Image("img\\pipe_bot.png",self.game) #Y-axis Min: 365 Max: 260
 
         '''
         s.drawRect(green,250,0,50,100)
@@ -46,9 +48,7 @@ class Pipe(object):
         '''
 
     def draw(self):
-        self.pipeTOP = Image("img\\pipe_top.png",self.game) #Y-axis Min: -100 Max: 135
         self.pipeTOP.moveTo(self.x,self.y)
-        self.pipeBOT = Image("img\\pipe_bot.png",self.game) #Y-axis Min: 365 Max: 260
         self.pipeBOT.moveTo(self.x,(self.y+270)+self.GAP)
         
     def move(self):
