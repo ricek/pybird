@@ -5,25 +5,25 @@ green = (115,190,50)
 class Bird(object):
     def __init__(self,game):
         self.game = game
-        self.bird = Animation("img\\bird\\bird ",3,self.game,frate=10)
-        self.bird.y = self.game.height/2
-        self.bird.moveTo(100,self.bird.y)
+        self.graphics = Animation("img\\bird\\bird ",3,self.game,frate=10)
+        self.graphics.y = self.game.height/2
+        self.graphics.moveTo(100,self.graphics.y)
 
     def fly(self):
-        if self.bird.y >= 0 and self.bird.y <= 380:
-            self.bird.y += 1
-            self.bird.moveTo(100,self.bird.y)
-            self.bird.draw()
+        if self.graphics.y >= 0 and self.graphics.y <= 380:
+            self.graphics.y += 1
+            self.graphics.moveTo(100,self.graphics.y)
+            self.graphics.draw()
            
     def move(self):
-        if self.bird.y >= 0 and self.bird.y <= 380:
-            self.bird.y -= 3
+        if self.graphics.y >= 0 and self.graphics.y <= 380:
+            self.graphics.y -= 3
             self.fly()
         
     def reset(self):
-        self.bird.y = self.game.height/2
-        self.bird.moveTo(100,self.bird.y)
-        self.bird.draw()
+        self.graphics.y = self.game.height/2
+        self.graphics.moveTo(100,self.graphics.y)
+        self.graphics.draw()
 
 class Pipe(object):
     def __init__(self,game):
