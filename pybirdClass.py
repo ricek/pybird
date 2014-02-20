@@ -21,7 +21,6 @@ class Bird(object):
             self.graphics.y += 1
             self.graphics.moveTo(100,self.graphics.y)
             self.graphics.draw()
-            
         else:
             self.reset()
            
@@ -33,10 +32,6 @@ class Bird(object):
         else:
             self.reset()       
 
-    def collidedWith(self,obj):
-        if self.rect.colliderect(obj.rect):
-            return True
-    
     #executed on death
     def reset(self):
         self.graphics.y = self.game.height/2
@@ -54,11 +49,11 @@ class Pipe(object):
         self.pipeBOT = Image("img\\pipe_bot.png",self.game) #Y-axis Min: 365 Max: 260
 
         '''
-        s.drawRect(green,250,0,50,100)
-        s.drawRect(black,250,0,50,100,1)
-        s.drawRect(green,230,90,90,40)
-        s.drawRect(black,230,90,90,40,1)
-    
+        self.s.drawRect(green,250,0,50,100)
+        self.s.drawRect(black,250,0,50,100,1)
+        self.s.drawRect(green,230,90,90,40)
+        self.s.drawRect(black,230,90,90,40,1)
+        
         s.drawRect(green,game.right-80,0,50,100)
         s.drawRect(black,game.right-80,0,50,100,2)
         s.drawRect(green,game.right-100,90,90,40)
