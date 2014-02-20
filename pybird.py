@@ -1,9 +1,8 @@
 from pybirdClass import *
 
 def gameOverMSG():
-    game.drawText("DEAD! Press ESC to quit",200,250,white,"update")
-    gmae.wait(K_ESCAPE)
-    game.over = True
+    game.drawText("DEAD! Press ESC to quit",275,150,white,"update")
+    #game.over = True
 
 game = Game(700,500,"PyBird",30)
 bk = Image("img\\day.png",game)
@@ -22,6 +21,10 @@ while not game.over:
     bk.draw()
     pipe.move()
     bar.draw()
+
+    #Collision detection problem ex
+    s.drawRect(red,bird.graphics.x-17, bird.graphics.y-12, bird.graphics.width,bird.graphics.height,1)
+    s.drawRect(red,pipe.pipeTOP.x,pipe.pipeTOP.y,pipe.pipeTOP.width,pipe.pipeTOP.height,1)
     
     if pipe.isOffScreen():
         pipe.reset()
@@ -31,13 +34,9 @@ while not game.over:
     else:
         bird.fly()
 
-    #if bird.collidedWith(pipe):
-        #game.over = True
-
-    #if bird.isOffScreen():
-        #game.drawText("DEAD! Try again\nPress ESC to quit",150,250)
-        #bird.resetBird()
-
+    if bird.graphics.collidedWith(pipe.pipeTOP,"rectangular"):
+           gameOverMSG()
+        
     game.update(60)
-    
+  
 game.quit()
