@@ -1,25 +1,43 @@
 from gamelib import *
 
 green = (115,190,50)
+die = "sfx\\die.mp3"
+hit = "sfx\\hit.mp3"
+point = "sfx\\point.mp3"
+swooshing = "sfx\\swooshing.mp3"
+wing = "sfx\\wing.mp3"
 
 class Bird(object):
     def __init__(self,game):
         self.game = game
+        self.game.setSound(wing)
         self.graphics = Animation("img\\bird\\bird ",3,self.game,frate=10)
         self.graphics.y = self.game.height/2
         self.graphics.moveTo(100,self.graphics.y)
 
     def fly(self):
         if self.graphics.y >= 0 and self.graphics.y <= 380:
+            self.game.stopSound()
             self.graphics.y += 1
             self.graphics.moveTo(100,self.graphics.y)
             self.graphics.draw()
+            
+        else:
+            self.reset()
            
     def move(self):
         if self.graphics.y >= 0 and self.graphics.y <= 380:
             self.graphics.y -= 3
             self.fly()
-        
+            self.game.playSound()
+        else:
+            self.reset()       
+
+    def collidedWith(self,obj):
+        if self.rect.colliderect(obj.rect):
+            return True
+    
+    #executed on death
     def reset(self):
         self.graphics.y = self.game.height/2
         self.graphics.moveTo(100,self.graphics.y)
@@ -30,7 +48,7 @@ class Pipe(object):
         self.game = game
         self.x = game.right
         self.y = randint(-90,135)
-        self.speed = -5
+        self.speed = -3
         self.GAP = 100
         self.pipeTOP = Image("img\\pipe_top.png",self.game) #Y-axis Min: -100 Max: 135
         self.pipeBOT = Image("img\\pipe_bot.png",self.game) #Y-axis Min: 365 Max: 260
@@ -47,10 +65,12 @@ class Pipe(object):
         s.drawRect(black,game.right-100,90,90,40,2)
         '''
 
+    #draws the wall
     def draw(self):
         self.pipeTOP.moveTo(self.x,self.y)
         self.pipeBOT.moveTo(self.x,(self.y+270)+self.GAP)
-        
+
+    #scrolls the wall    
     def move(self):
         self.pipeTOP.moveX(self.speed)
         self.pipeTOP.draw()
@@ -62,6 +82,7 @@ class Pipe(object):
         if self.x <= -20:
             return True
 
+    #executed on death
     def reset(self):
         self.x = self.game.right
         self.y = randint(-90,135)
