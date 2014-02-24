@@ -1,4 +1,3 @@
-import pygame
 from gamelib import *
 
 green = (115,190,50)
@@ -15,7 +14,6 @@ class Bird(object):
         self.graphics = Animation("img\\bird\\bird ",3,self.game,frate=10)
         self.graphics.y = self.game.height/2
         self.graphics.moveTo(100,self.graphics.y)
-        self.graphics.rect = pygame.Rect(self.graphics.x-17, self.graphics.y-12, self.graphics.width,self.graphics.height)
 
     def fly(self):
         if self.graphics.y >= 0 and self.graphics.y <= 380:
@@ -32,14 +30,8 @@ class Bird(object):
             self.fly()
             self.game.playSound()
         else:
-            self.reset()       
-
-    def collidedWith(self,obj):
-        self.obj = obj
-        self.obj.rect = pygame.Rect(self.obj.x-26, self.obj.y-135, self.obj.width,self.obj.height)
-        if self.graphics.rect.colliderect(self.obj.rect):
-            return True
-
+            self.reset()
+            
     #executed on death
     def reset(self):
         self.graphics.y = self.game.height/2
