@@ -148,7 +148,7 @@ class Image(object):
             rot_rect = org_rect.copy()
             rot_rect.center = rot_img.get_rect().center
             self.image = rot_img.subsurface(rot_rect).copy()
-        self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
+        self.rect = pygame.Rect(self.left,self.top,self.width,self.height)
         self.left, self.top, self.right, self.bottom  = self.x-self.width/2,self.y-self.height/2, self.x + self.width/2, self.y + self.height/2
         if self.visible:
             self.game.screen.blit(self.image, [self.x - self.width/2,self.y - self.height/2])
