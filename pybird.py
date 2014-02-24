@@ -21,11 +21,6 @@ while not game.over:
     bk.draw()
     pipe.move()
     bar.draw()
-
-    #Collision detection problem ex
-    s.drawRect(red,bird.graphics.x-17, bird.graphics.y-12, bird.graphics.width,bird.graphics.height,1)
-    s.drawRect(red,pipe.pipeTOP.x-26,pipe.pipeTOP.y-135,pipe.pipeTOP.width,pipe.pipeTOP.height,1)
-    s.drawRect(red,pipe.pipeBOT.x-26,pipe.pipeBOT.y-135,pipe.pipeBOT.width,pipe.pipeBOT.height,1)
     
     if pipe.isOffScreen():
         pipe.reset()
@@ -35,7 +30,7 @@ while not game.over:
     else:
         bird.fly()
 
-    if bird.collidedWith(pipe.pipeTOP) or bird.collidedWith(pipe.pipeBOT):
+    if bird.graphics.collidedWith(pipe.pipeTOP,"rectangular") or bird.graphics.collidedWith(pipe.pipeBOT,"rectangular"):
            gameOverMSG()
         
     game.update(60)
