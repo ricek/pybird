@@ -16,21 +16,15 @@ class Bird(object):
         self.graphics.moveTo(100,self.graphics.y)
 
     def fly(self):
-        if self.graphics.y >= 0 and self.graphics.y <= 380:
             self.game.stopSound()
-            self.graphics.y += 1
+            self.graphics.y += 2
             self.graphics.moveTo(100,self.graphics.y)
             self.graphics.draw()
-        else:
-            self.reset()
            
     def move(self):
-        if self.graphics.y >= 0 and self.graphics.y <= 380:
-            self.graphics.y -= 3
+            self.graphics.y -= 5
             self.fly()
             self.game.playSound()
-        else:
-            self.reset()
             
     #executed on death
     def reset(self):
