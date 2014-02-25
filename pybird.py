@@ -1,8 +1,8 @@
 from pybirdClass import *
 
 def gameOverMSG():
-    game.drawText("DEAD! Press ESC to quit",275,150,white,"update")
-    #game.over = True
+    game.drawText("DEAD! Press ESC to quit",275,150,white)
+    game.over = True
 
 game = Game(700,500,"PyBird",30)
 bk = Image("img\\day.png",game)
@@ -11,27 +11,28 @@ bar.moveY(200)
 s = Shape(game)
 
 bird = Bird(game)
-pipe = Pipe(game)
+pipes = []
 
-pipe.draw()
+for x in range(3):
+    pipes.append(Pipe(game,(game.width/3*x),3))
+    pipes[x].create()
 
 #Game Loop
 while not game.over:
     game.processInput()
     bk.draw()
-    pipe.move()
+    for x in range(len(pipes)):
+        pipes[x].move()
+        if pipes[x].isOffScreen():
+            pipes[x].reset()
+        if bird.graphics.collidedWith(pipes[x].pipeTOP,"rectangular") or bird.graphics.collidedWith(pipes[x].pipeBOT,"rectangular"):
+            gameOverMSG()
     bar.draw()
-    
-    if pipe.isOffScreen():
-        pipe.reset()
-        
+   
     if keys.Pressed[K_SPACE]:
         bird.move()
     else:
         bird.fly()
-
-    if bird.graphics.collidedWith(pipe.pipeTOP,"rectangular") or bird.graphics.collidedWith(pipe.pipeBOT,"rectangular"):
-           gameOverMSG()
         
     game.update(60)
   
