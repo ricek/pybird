@@ -39,29 +39,17 @@ class Bird(object):
         self.graphics.draw()
 
 class Pipe(object):
-    def __init__(self,game):
+    def __init__(self,game,offset,speed):
         self.game = game
-        self.x = game.right
-        self.y = randint(-90,135)
-        self.speed = 3
+        self.speed = speed
         self.GAP = 100
+        self.x = game.right + offset
+        self.y = randint(-90,135)   
         self.pipeTOP = Image("img\\pipe_top.png",self.game) #Y-axis Min: -100 Max: 135
         self.pipeBOT = Image("img\\pipe_bot.png",self.game) #Y-axis Min: 365 Max: 260
 
-        '''
-        self.s.drawRect(green,250,0,50,100)
-        self.s.drawRect(black,250,0,50,100,1)
-        self.s.drawRect(green,230,90,90,40)
-        self.s.drawRect(black,230,90,90,40,1)
-        
-        s.drawRect(green,game.right-80,0,50,100)
-        s.drawRect(black,game.right-80,0,50,100,2)
-        s.drawRect(green,game.right-100,90,90,40)
-        s.drawRect(black,game.right-100,90,90,40,2)
-        '''
-
     #draws the wall
-    def draw(self):
+    def create(self):
         self.pipeTOP.moveTo(self.x,self.y)
         self.pipeBOT.moveTo(self.x,(self.y+270)+self.GAP)
 
@@ -74,11 +62,11 @@ class Pipe(object):
 
     def isOffScreen(self):
         self.x = self.x - self.speed
-        if self.x <= -20:
+        if self.x <= -10:
             return True
 
     #executed on death
     def reset(self):
         self.x = self.game.right
         self.y = randint(-90,135)
-        self.draw()
+        self.create()
